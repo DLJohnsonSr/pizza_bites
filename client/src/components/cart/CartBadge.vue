@@ -20,8 +20,8 @@ const { mapGetters } = createNamespacedHelpers("cart");
 export default {
   name: "CartBadge",
   computed: {
-    ...mapGetters(["getNumberOfItems", "getCartSubtotal"]),
-  },
+    ...mapGetters(["getNumberOfItems", "getCartSubtotal"])
+  }
 };
 </script>
 

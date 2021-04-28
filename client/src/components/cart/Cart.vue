@@ -45,11 +45,11 @@ export default {
   name: "Cart",
   computed: {
     ...mapState(["isCartOpen", "cart"]),
-    ...mapGetters(["getNumberOfItems"]),
+    ...mapGetters(["getNumberOfItems"])
   },
   methods: {
-    ...mapMutations(["toggleCart", "emptyCart"]),
-  },
+    ...mapMutations(["toggleCart", "emptyCart"])
+  }
 };
 </script>
 

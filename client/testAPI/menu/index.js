@@ -31,7 +31,7 @@ const sideToppings = [
     toppings: [
       "mustard",
       "ketchup",
-      "mayonaise",
+      "mayonnaise",
       "garlic sauce",
       "marinara sauce",
     ],
@@ -61,6 +61,7 @@ export let menu = [
     categoryToppings: pizzaToppings,
     items: [
       {
+        id: 1,
         name: "the ultimate",
         img,
         description,
@@ -85,6 +86,7 @@ export let menu = [
         ],
       },
       {
+        id: 2,
         name: "cheese lover",
         img,
         description,
@@ -96,6 +98,7 @@ export let menu = [
         ],
       },
       {
+        id: 3,
         name: "custom pizza",
         img,
         description,
@@ -113,6 +116,7 @@ export let menu = [
     categoryToppings: sideToppings,
     items: [
       {
+        id: 4,
         name: "fries",
         img,
         description,
@@ -124,6 +128,7 @@ export let menu = [
         ],
       },
       {
+        id: 5,
         name: "bread sticks",
         img,
         description,
@@ -141,6 +146,7 @@ export let menu = [
     categoryToppings: drinkToppings,
     items: [
       {
+        id: 6,
         name: "fountian drink",
         img,
         description,
@@ -152,6 +158,7 @@ export let menu = [
         ],
       },
       {
+        id: 7,
         name: "iced tea",
         img,
         description,

@@ -11,28 +11,28 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home,
+      component: Home
     },
     {
       path: "/menu",
       name: "menu",
-      component: () => import("@/views/store_front/Menu.vue"),
+      component: () => import("@/views/store_front/Menu.vue")
     },
     {
       // path: "/edit/source/:source/category/:category/name/:name",
-      path: "/edit/source/:source/category/:category/name/:name/(id/:id)?",
+      path: "/edit/source/:source/category/:category/name/:name/id/:id",
       name: "edit",
-      component: () => import("@/views/store_front/EditItem.vue"),
+      component: () => import("@/views/store_front/EditItem.vue")
     },
     {
       path: "/checkout",
       name: "checkout",
-      component: () => import("@/views/store_front/Checkout.vue"),
-    },
+      component: () => import("@/views/store_front/Checkout.vue")
+    }
     // {
     //   path: "/cart",
     //   name: "cart",
     //   component: () => import("@/components/Cart.vue")
     // }
-  ],
+  ]
 });

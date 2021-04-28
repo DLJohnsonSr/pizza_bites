@@ -6,6 +6,10 @@ import {
   generateRandomId,
 } from "./cartService";
 
+import Dinero from "dinero.js";
+// Dinero.globalLocale = "en-US";
+Dinero.globalFormat = "0.00";
+
 const state = () => ({
   isCartOpen: false,
   cart: [],
@@ -14,16 +18,19 @@ const state = () => ({
 const getters = {
   getItemTotal: (state) => (id) => {
     const item = findItemById(state, id);
-    return item.price * item.quantity;
+    return Dinero({ amount: item.price * 100 })
+      .multiply(item.quantity)
+      .toFormat();
   },
   getNumberOfItems: (state) => {
-    return state.cart.reduce((sum, item) => sum + item.quantity, 0);
+    return state.cart.reduce((sum, item) => sum + +item.quantity, 0);
   },
   getCartSubtotal: (state, getters) => {
-    return state.cart.reduce(
-      (sum, item) => sum + getters.getItemTotal(item.id),
-      0
-    );
+    return state.cart.reduce((sum, item) => {
+      return Dinero({ amount: sum * 100 })
+        .add(Dinero({ amount: getters.getItemTotal(item.id) * 100 }))
+        .toFormat();
+    }, 0);
   },
 };
 
@@ -55,7 +62,6 @@ const mutations = {
   },
   updateItemInCart(state, payload) {
     const item = findItemById(state, payload.id);
-    console.log(item);
     for (const key in payload) {
       if (key !== "id" && Object.hasOwnProperty.call(item, key)) {
         item[key] = payload[key];
@@ -72,7 +78,9 @@ const mutations = {
 
 const actions = {
   addItemToCart({ state, commit }, item) {
-    if (isItemInCart(state, item)) {
+    const result = isItemInCart(state, item);
+    if (result.boolean) {
+      item.id = result.id;
       commit("updateItemInCart", item);
     } else {
       commit("pushItemToCart", item);

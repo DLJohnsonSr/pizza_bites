@@ -1,13 +1,13 @@
 import { menu } from "../../../../testAPI";
 
 const state = {
-  menu,
+  menu
 };
 
 const mutations = {
   populateMenu(state, payload) {
     state.menu = [...payload];
-  },
+  }
 };
 
 const actions = {
@@ -15,7 +15,7 @@ const actions = {
     // get menu from api
     // commit api menu to local menu
     commit("populateMenu", thisMenu);
-  },
+  }
 };
 
 const getters = {};
@@ -25,5 +25,5 @@ export default {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };

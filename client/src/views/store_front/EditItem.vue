@@ -116,51 +116,86 @@ export default {
   name: "EditItem",
   data() {
     return {
-      params: this.$route.params,
+      category: {
+        category: null,
+        categoryToppings: null,
+        items: null
+      },
+      item: {
+        id: null,
+        category: null,
+        name: null,
+        toppings: null,
+        img: {
+          src: null,
+          alt: null
+        },
+        description: null,
+        details: null
+      },
+      cartItem: {
+        id: null,
+        category: null,
+        name: null,
+        toppings: null,
+        size: null,
+        quantity: null,
+        price: null
+      }
     };
   },
-  watch: {
-    $route(to, from) {
-      this.params = to.params;
-    },
+  created() {
+    // populate category
+    const category = menu.find(
+      menuCategory => menuCategory.category === this.$route.params.category
+    );
+
+    for (const key in category) {
+      this.category[key] = category[key];
+    }
+
+    // populate item
+    const item = this.category.items.find(
+      menuItem => menuItem.name === this.$route.params.name
+    );
+
+    for (const key in item) {
+      this.item[key] = item[key];
+    }
+
+    // IF route from "menu" populate cartItem from menu item
+    if (this.$route.params.source === "menu") {
+      this.cartItem.category = this.category.category;
+      this.cartItem.name = this.item.name;
+      this.cartItem.toppings = this.item.toppings;
+      this.cartItem.size = this.item.details[0].size;
+      this.cartItem.price = this.item.details[0].price;
+      this.cartItem.quantity = 1;
+      // ELSE IF route from "cart" or checkout populate cartItem from cart item
+    } else if (
+      this.$route.params.source === "cart" ||
+      this.$route.params.source === "checkout"
+    ) {
+      const cartItem = this.cart.find(item => item.id == this.$route.params.id);
+
+      for (const key in cartItem) {
+        this.cartItem[key] = cartItem[key];
+      }
+    }
   },
   computed: {
-    ...mapState(["cart"]),
-    // params: function() {
-    //   return this.$route.params;
-    // },
-    category: function() {
-      return menu.find(
-        (menuCategory) => menuCategory.category === this.params.category
-      );
-    },
-    item: function() {
-      return this.category.items.find(
-        (menuItem) => menuItem.name === this.params.name
-      );
-    },
-    cartItem: function() {
-      const cartItem = {};
-      if (this.params.source === "menu") {
-        console.log("menu");
-        cartItem.category = this.category.category;
-        cartItem.name = this.item.name;
-        cartItem.toppings = this.item.toppings;
-        cartItem.size = this.item.details[0].size;
-        cartItem.price = this.item.details[0].price;
-        cartItem.quantity = 1;
-      } else if (
-        this.params.source === "cart" ||
-        this.params.source === "checkout"
-      ) {
-        console.log("cart");
-        cartItem = this.$store.state.cart.find((item) => item.id === params.id);
-      }
-      return cartItem;
-    },
+    ...mapState(["cart"])
   },
   methods: {
+    setCartItemPrice() {
+      this.cartItem.price = this.item.details.find(
+        detail => detail.size === this.cartItem.size
+      ).price;
+    },
     addItemRouteCheckout(cartItem) {
+      cartItem.price = this.item.details.find(
+        detail => detail.size === cartItem.size
+      ).price;
       this.$store.dispatch("cart/addItemToCart", cartItem);
       this.$router.push({ name: "checkout" });
     },
@@ -178,8 +213,8 @@ export default {
 
         return camelCaseName.concat(thisWord);
       }, "");
-    },
-  },
+    }
+  }
 };
 </script>
 

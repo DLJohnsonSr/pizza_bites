@@ -8,8 +8,8 @@
 export default {
   name: "CartButton",
   props: {
-    buttonText: String,
-  },
+    buttonText: String
+  }
 };
 </script>
 

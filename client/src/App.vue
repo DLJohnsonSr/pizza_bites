@@ -82,13 +82,13 @@ export default {
   data() {
     return {
       hours,
-      locations,
+      locations
     };
   },
   components: {
     PizzaBitesLogo,
-    CartModal,
-  },
+    CartModal
+  }
 };
 </script>
 <style>

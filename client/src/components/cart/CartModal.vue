@@ -76,14 +76,14 @@ export default {
   name: "CartModal",
   computed: {
     ...mapState(["isCartOpen", "cart"]),
-    ...mapGetters(["getNumberOfItems", "getCartSubtotal"]),
+    ...mapGetters(["getNumberOfItems", "getCartSubtotal"])
   },
   methods: {
     ...mapMutations(["toggleCart", "emptyCart"]),
     checkout() {
       this.$router.push({ name: "checkout" });
-    },
-  },
+    }
+  }
 };
 </script>
 

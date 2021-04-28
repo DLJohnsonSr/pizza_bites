@@ -35,7 +35,9 @@
                 '/edit/source/menu/category/' +
                   menuItem.category +
                   '/name/' +
-                  item.name
+                  item.name +
+                  '/id/' +
+                  item.id
               "
               class="text-decoration-none text-dark"
             >
@@ -57,7 +59,7 @@ export default {
   name: "Menu",
   components: { DisplayItem },
   computed: {
-    ...mapState(["menu"]),
-  },
+    ...mapState(["menu"])
+  }
 };
 </script>

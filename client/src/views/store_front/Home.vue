@@ -48,9 +48,9 @@ export default {
   name: "Home",
   data() {
     return {
-      coupons,
+      coupons
     };
   },
-  components: { DisplayItem },
+  components: { DisplayItem }
 };
 </script>

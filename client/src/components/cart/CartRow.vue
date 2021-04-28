@@ -62,10 +62,10 @@ const { mapGetters, mapMutations } = createNamespacedHelpers("cart");
 export default {
   name: "CartRow",
   props: {
-    item: Object,
+    item: Object
   },
   computed: {
-    ...mapGetters(["getItemTotal"]),
+    ...mapGetters(["getItemTotal"])
   },
   methods: {
     addToppingComma(toppings) {
@@ -77,23 +77,13 @@ export default {
         return toppingStr;
       }, "");
     },
-    // editItem(item) {
-    //   this.$router.push(
-    //     "/edit/source/cart/category/" +
-    //       item.category +
-    //       "/name/" +
-    //       item.name +
-    //       "/id/" +
-    //       item.id
-    //   );
-    // },
     ...mapMutations([
       "incrementItemQuantity",
       "decrementItemQuantity",
       "editItemQuantity",
-      "removeCartItem",
-    ]),
-  },
+      "removeCartItem"
+    ])
+  }
 };
 </script>
 

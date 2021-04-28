@@ -9,6 +9,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import "es6-promise/auto";
 
+// import "dinero.js";
+
 Vue.config.productionTip = false;
 
 new Vue({

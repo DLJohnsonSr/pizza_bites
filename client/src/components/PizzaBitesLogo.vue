@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "PizzaBitesLogo"
+  name: "PizzaBitesLogo",
 };
 </script>
 
